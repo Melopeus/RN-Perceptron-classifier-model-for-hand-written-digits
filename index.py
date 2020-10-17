@@ -32,21 +32,16 @@ def onlineTraining():
         trainInput, trainInputAnswer = zip(*c)  
         # trainInput = toate imaginile trainInputAnswer = ce cifra e scrisa
         for i, x in enumerate(trainInput, 0):
+            if(i%1000 == 0):
+                print("Epoch:%d Img: %d"%(numIterations,i))
             for node in range(0, 10):  
                 expected = 1 if node == trainInputAnswer[i] else 0
                 y = x@w[node] + b[node]
                 output = activation(y)
-                if(i == len(trainInput)):
-                    print("Input: %d -- Node: %d -- Result %d" %
-                          (trainInputAnswer[1][i], node, output))
                 w[node] = w[node] + (expected - output)*x*learningRate
                 b[node] = b[node] + (expected - output)*learningRate
                 if(output != expected):
                     allClassified = False
-        print(100-numIterations)
-        if(numIterations % 15 == 0):
-            test()
-
         numIterations -= 1
 
 
