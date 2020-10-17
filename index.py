@@ -22,16 +22,17 @@ def activation(x):
 
 
 def onlineTraining():
-    numIterations = 10
+    numIterations = 2
     allClassified = False
     trainInputNormal = numpy.array(train_set[0][:])
     trainInputAnswer = 0
     while(not allClassified and numIterations > 0):
         allClassified = True
         c = list(zip(trainInputNormal, train_set[1]))
-        trainInput, trainInputAnswer = zip(*c)
+        trainInput, trainInputAnswer = zip(*c)  
+        # trainInput = toate imaginile trainInputAnswer = ce cifra e scrisa
         for i, x in enumerate(trainInput, 0):
-            for node in range(0, 10):
+            for node in range(0, 10):  
                 expected = 1 if node == trainInputAnswer[i] else 0
                 y = x@w[node] + b[node]
                 output = activation(y)
@@ -54,9 +55,9 @@ def miniBatchTraining():
     global b
     global deltaB
     global deltaW
-    numIterations = 2
+    numIterations = 2  # epochs
     allClassified = False
-    trainInputNormal = numpy.array(train_set[0][:])
+    trainInputNormal = numpy.array(train_set[0][:])  
     trainInputAnswer = 0
     while(not allClassified and numIterations > 0):
         allClassified = True
@@ -108,7 +109,7 @@ def test():
     # print(correct,len(testInput) )
     print("Procentaj: %f" % (correct/len(testInput)))
 
-#onlineTraining()
-miniBatchTraining()
+onlineTraining()
+#miniBatchTraining()
 test()
 
